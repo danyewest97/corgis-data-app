@@ -1,0 +1,23 @@
+.center {
+	text-align: center;
+	margin: auto;
+}
+
+p {
+	font-size: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+h1 {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.short-submit {
+	
+}
+
+form > input {
+	
+}
