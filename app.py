@@ -5,7 +5,7 @@ app = Flask(__name__) #__name__ = "__main__" if this is the file that was run.  
 
 @app.route("/")
 def render_home():
-    main.print_data()
+    # main.print_data()
     return render_template('home.html', )
 
 if __name__=="__main__":
