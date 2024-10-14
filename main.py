@@ -44,14 +44,14 @@ def turbineToString(turbine):
     # Adding the turbine data
     turbineInfo1 = "Turbine Info: "
     turbineInfo1 += "Capacity: " + str(turbine["Turbine"]["Capacity"]) + " kilowatts, "
-    turbineInfo1 += "Hub Height: " + str(turbine["Turbine"]["Hub_Height"]) + " meters, "
+    turbineInfo1 += "hub height: " + str(turbine["Turbine"]["Hub_Height"]) + " meters, "
+    turbineInfo1 += "rotor diameter: " + str(turbine["Turbine"]["Rotor_Diameter"]) + " meters, "
     
     # Each entry in the result list is shown as a new line on the site
     # Making another turbineInfo variable to display turbine info on 2 separate lines
     turbineInfo2 = ""
-    turbineInfo2 += "Rotor Diameter: " + str(turbine["Turbine"]["Rotor_Diameter"]) + " meters, "
-    turbineInfo2 += "Swept Area: " + str(turbine["Turbine"]["Swept_Area"]) + " square meters, "
-    turbineInfo2 += "Total Height: " + str(turbine["Turbine"]["Total_Height"]) + " meters."
+    turbineInfo2 += "swept area: " + str(turbine["Turbine"]["Swept_Area"]) + " square meters, "
+    turbineInfo2 += "total height: " + str(turbine["Turbine"]["Total_Height"]) + " meters."
     
     result.append(str(turbineInfo1))
     result.append(str(turbineInfo2))

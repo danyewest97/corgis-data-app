@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
-{% set active_page = "turbines" %}
+{% set active_page = "locations" %}
 
-{% block title %}Turbines{% endblock %}
+{% block title %}Locations{% endblock %}
 
 {% block content %}
     <!--page content-->
 	<div class="center">
 		
 		<br>
-		<h1>Wind Turbine Statistics</h1>
+		<h1>Wind Turbine Location Statistics</h1>
 		<br>
-		<form action="/turbineform">
+		<form action="/locationform">
 			<input type="radio" name="highlow" value="high" checked="checked">Highest</input>
 			<br>
 			<input type="radio" name="highlow" value="low">Lowest</input>

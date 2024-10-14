@@ -16,15 +16,32 @@ def render_turbine_form():
     data = main.get_data("Turbine", request.args["key"], request.args["highlow"])
     keyString = str(request.args["key"]).lower()
     keyString = keyString.replace("_", " ")
-    return render_template('turbines.html', response=main.turbineToString(data), highlow=request.args["highlow"], key=keyString)
+    return render_template('turbines.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine with the " + request.args["highlow"] + "est " + keyString + ": ")
     
-# @app.route("/projects")
-# def render_projects():
-    # return render_template('home.html', response=data)
+@app.route("/projects")
+def render_projects():
+    return render_template('projects.html')
+
+@app.route("/projectform")
+def render_project_form():
+    data = main.get_data("Project", request.args["key"], request.args["highlow"])
+    keyString = str(request.args["key"]).lower()
+    keyString = keyString.replace("_", " ")
+    if (keyString == "Number Turbines"):
+        keyString == "Number of Turbines"
     
-# @app.route("/locations")
-# def render_locations():
-    # return render_template('home.html', response=data)
+    return render_template('projects.html', response=main.turbineToString(data), keyhighlow="Here is the info on one of the turbines in the project with the " + request.args["highlow"] + "est " + keyString + ": ")
+    
+@app.route("/locations")
+def render_locations():
+    return render_template('locations.html')
+
+@app.route("/locationform")
+def render_location_form():
+    data = main.get_data("Site", request.args["key"], request.args["highlow"])
+    keyString = str(request.args["key"]).lower()
+    keyString = keyString.replace("_", " ")
+    return render_template('locations.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine with the " + request.args["highlow"] + "est " + keyString + ": ")
 
 if __name__=="__main__":
     app.run(debug=False)
