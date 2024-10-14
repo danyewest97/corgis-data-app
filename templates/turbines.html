@@ -7,9 +7,34 @@
 {% block content %}
     <!--page content-->
 	<div class="center">
+		
 		<br>
 		<h1>Wind Turbine Statistics</h1>
 		<br>
-		<p>{{ response }}</p>
+		<form action="/turbineform">
+			<input type="radio" name="highlow" value="high" checked="checked">Highest</input>
+			<br>
+			<input type="radio" name="highlow" value="low">Lowest</input>
+			<br>
+			<br>
+			<select name="key">
+				<option value="Capacity">Capacity</option>
+				<option value="Hub_Height">Hub Height</option>
+				<option value="Rotor_Diameter">Rotor Diameter</option>
+				<option value="Swept_Area">Swept Area</option>
+				<option value="Total_Height">Total Height</option>
+			</select>
+			<br>
+			<br>
+			<input type="submit">
+		</form>
+		<br>
+		<h1>Here is the info on the turbine with the {{ highlow }}est {{ key }}:
+		<br>
+		<br>
+		{% for i in response %}
+			<p>{{ i }}</p>
+		{% endfor %}
+		
 	</div>
 {% endblock %}

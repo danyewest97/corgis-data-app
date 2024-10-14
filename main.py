@@ -20,7 +20,12 @@ def get_data(category, key, highlow):
         return result
         
     elif (highlow == "low"):
-        print()
+        lowest = sys.maxsize
+        for element in data:
+            if lowest > element[category][key]:
+                result = element
+                lowest = element[category][key]
+        return result
         
 
 
@@ -35,11 +40,24 @@ def turbineToString(turbine):
     site += str(turbine["Site"]["Longitude"]) + " degrees longitude."
     result.append(str(site))
     
-    # Adding the turbine data
-    turbine += "Turbine Info: "
-    turbine += str(turbine["Site"]["Latitude"]) + " degrees latitude, "
     
-    result.append(str(turbine))
+    # Adding the turbine data
+    turbineInfo1 = "Turbine Info: "
+    turbineInfo1 += "Capacity: " + str(turbine["Turbine"]["Capacity"]) + " kilowatts, "
+    turbineInfo1 += "Hub Height: " + str(turbine["Turbine"]["Hub_Height"]) + " meters, "
+    
+    # Each entry in the result list is shown as a new line on the site
+    # Making another turbineInfo variable to display turbine info on 2 separate lines
+    turbineInfo2 = ""
+    turbineInfo2 += "Rotor Diameter: " + str(turbine["Turbine"]["Rotor_Diameter"]) + " meters, "
+    turbineInfo2 += "Swept Area: " + str(turbine["Turbine"]["Swept_Area"]) + " square meters, "
+    turbineInfo2 += "Total Height: " + str(turbine["Turbine"]["Total_Height"]) + " meters."
+    
+    result.append(str(turbineInfo1))
+    result.append(str(turbineInfo2))
+    
+    # Adding the project data
+    
     
     return result
     
