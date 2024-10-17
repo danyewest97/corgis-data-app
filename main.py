@@ -42,22 +42,66 @@ def turbineToString(turbine):
     
     
     # Adding the turbine data
-    turbineInfo1 = "Turbine Info: "
-    turbineInfo1 += "Capacity: " + str(turbine["Turbine"]["Capacity"]) + " kilowatts, "
-    turbineInfo1 += "hub height: " + str(turbine["Turbine"]["Hub_Height"]) + " meters, "
-    turbineInfo1 += "rotor diameter: " + str(turbine["Turbine"]["Rotor_Diameter"]) + " meters, "
+    turbineInfo = "Turbine Info: "
+    turbineInfo += "Capacity: " + str(turbine["Turbine"]["Capacity"]) + " kilowatts, "
+    turbineInfo += "hub height: " + str(turbine["Turbine"]["Hub_Height"]) + " meters, "
+    turbineInfo += "rotor diameter: " + str(turbine["Turbine"]["Rotor_Diameter"]) + " meters, "
+    turbineInfo += "swept area: " + str(turbine["Turbine"]["Swept_Area"]) + " square meters, "
+    turbineInfo += "total height: " + str(turbine["Turbine"]["Total_Height"]) + " meters."
     
-    # Each entry in the result list is shown as a new line on the site
-    # Making another turbineInfo variable to display turbine info on 2 separate lines
-    turbineInfo2 = ""
-    turbineInfo2 += "swept area: " + str(turbine["Turbine"]["Swept_Area"]) + " square meters, "
-    turbineInfo2 += "total height: " + str(turbine["Turbine"]["Total_Height"]) + " meters."
-    
-    result.append(str(turbineInfo1))
-    result.append(str(turbineInfo2))
+    result.append(str(turbineInfo))
     
     # Adding the project data
+    projectData = "Project Info: "
+    projectData += "Capacity: " + str(turbine["Project"]["Capacity"]) + " megawatts, "
+    projectData += "number of turbines: " + str(turbine["Project"]["Number_Turbines"]) + " turbines."
     
+    result.append(str(projectData))
     
     return result
+
+
+def get_data_by_state(category, key, highlow, state):
+    if (state == "<none>"):
+        return get_data(category, key, highlow)
+    
+    
+    with open("static/data.json") as file:
+        data = json.load(file);
+    
+    
+    if (highlow == "high"):
+        highest = -sys.maxsize - 1
+        for element in data:
+            if highest < element[category][key]:
+                if element["Site"]["State"] == state:
+                    result = element
+                    highest = element[category][key]
+        return result
+        
+    elif (highlow == "low"):
+        lowest = sys.maxsize
+        for element in data:
+            if lowest > element[category][key]:
+                result = element
+                lowest = element[category][key]
+        return result
+
+
+def get_state_options():
+    with open("static/data.json") as file:
+        data = json.load(file);
+    
+    states = ["<none>"] # Adding a none option at the start for the user to look at all wind turbines in the US, instead of just one state
+    
+    for element in data:
+        found = 0
+        for state in states:
+            if element["Site"]["State"] == state:
+                found = 1
+        if found != 1:
+            states.append(element["Site"]["State"])
+            found = 0
+    
+    return states
     

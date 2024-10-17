@@ -26,6 +26,14 @@
 			</select>
 			<br>
 			<br>
+			<p>Filter by state (states not shown do not have any wind turbines):</p>
+			<select name="state">
+				{% for option in options %}
+					<option value={{ option }}>{{ option }}</option>
+				{% endfor %}
+			</select>
+			<br>
+			<br>
 			<input type="submit">
 		</form>
 		<br>
