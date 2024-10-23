@@ -12,17 +12,13 @@
 		<h1>Wind Turbine Location Statistics</h1>
 		<br>
 		<form action="/locationform">
-			<input type="radio" name="highlow" value="high" checked="checked">Highest</input>
+			<h1>Select a state to learn more!</h1>
+			<p>(States not shown do not have any wind turbines)</p>
 			<br>
-			<input type="radio" name="highlow" value="low">Lowest</input>
-			<br>
-			<br>
-			<select name="key">
-				<option value="Capacity">Capacity</option>
-				<option value="Hub_Height">Hub Height</option>
-				<option value="Rotor_Diameter">Rotor Diameter</option>
-				<option value="Swept_Area">Swept Area</option>
-				<option value="Total_Height">Total Height</option>
+			<select name="state">
+				{% for option in options %}
+					<option value={{ option }}>{{ option | e }}</option>
+				{% endfor %}
 			</select>
 			<br>
 			<br>
@@ -33,7 +29,9 @@
 		<br>
 		<br>
 		{% for i in response %}
-			<p>{{ i }}</p>
+			<!-- Safe filter is for safe info, allows me to pass html elements as jinja variables (i can be an element instead of just a string) -->
+			<!-- In this case I know the info will be safe because response will only have data about a single state stored in it, and the user can't manipulate the response variable at all -->
+			{{ i|safe }}
 		{% endfor %}
 		
 	</div>

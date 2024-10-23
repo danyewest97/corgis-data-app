@@ -104,4 +104,10 @@ def get_state_options():
             found = 0
     
     return states
+
+
+def get_state_data(state):
+    result = []
     
+    result.append("<h1>temp</h1>")
+    return result
