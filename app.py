@@ -20,13 +20,19 @@ def render_turbine_form():
         data = main.get_data("Turbine", request.args["key"], request.args["highlow"])
         keyString = str(request.args["key"]).lower()
         keyString = keyString.replace("_", " ")
-        return render_template('turbines.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
+        if request.args["highlow"] == "average":
+            return render_template('turbines.html', response=data, keyhighlow="The average " + keyString + " of all turbines in the US is: ", options=states)
+        else:
+            return render_template('turbines.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
 
     else:
         data = main.get_data_by_state("Turbine", request.args["key"], request.args["highlow"], state)
         keyString = str(request.args["key"]).lower()
         keyString = keyString.replace("_", " ")
-        return render_template('turbines.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine in " + state + " with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
+        if request.args["highlow"] == "average":
+            return render_template('turbines.html', response=data, keyhighlow="The average " + keyString + " of all turbines in " + state + " is: ", options=states)
+        else:
+            return render_template('turbines.html', response=main.turbineToString(data), keyhighlow="Here is the info on the turbine in " + state + " with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
     
     return null
     
@@ -56,6 +62,7 @@ def render_project_form():
     
 @app.route("/locations")
 def render_locations():
+    # print(main.get_data_for_pie())
     return render_template('locations.html', options=states)
 
 @app.route("/locationform")
@@ -66,6 +73,11 @@ def render_location_form():
     else:
         data = main.get_state_data(state)
         return render_template('locations.html', options=states, response=data)
+
+@app.route("/growth")
+def render_growth():
+    # print(main.get_data_for_bar())
+    return render_template("growth.html", state="the US", data=main.get_data_for_bar())
 
 if __name__=="__main__":
     app.run(debug=False)

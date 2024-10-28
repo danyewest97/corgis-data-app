@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% set active_page = "growth" %}
+
+{% block title %}Growth{% endblock %}
+
+{% block content %}
+    <!--page content-->
+	<script src="static/turbines_growth.js"></script>
+	<meta id="data" data-state="{{ state }}" data-points="{{ data }}">
+	<div class="center">
+		<br>
+		<!-- <h1>Growth in the number of wind turbines over the years</h1> -->
+		<br>
+		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	</div>
+{% endblock %}
