@@ -57,7 +57,7 @@ def get_data(category, key, highlow):
         for element in data:
                 total += element[category][key]
                 numPoints += 1
-        result.append(str(total/numPoints) + " " + units)
+        result.append(str(round(total/numPoints, 2)) + " " + units)
         return result
         
 
@@ -151,7 +151,7 @@ def get_data_by_state(category, key, highlow, state):
             if element["Site"]["State"] == state:
                     total += element[category][key]
                     numPoints += 1
-        result.append(str(total/numPoints) + " " + units)
+        result.append(str(round(total/numPoints, 2)) + " " + units)
         return result
 
 

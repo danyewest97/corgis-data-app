@@ -12,8 +12,10 @@ window.onload = function () {
 		},
 		axisY: {
 			title: "Number of Turbines Built",
-			includeZero: false,
+			includeZero: false
 		},
+		dataPointMinWidth: 40,
+		dataPointMaxWidth: 1000,
 		toolTip: {
 			contentFormatter: function (e) {
                return e.entries[0].dataPoint.x + ": " + e.entries[0].dataPoint.y + " turbines";  
