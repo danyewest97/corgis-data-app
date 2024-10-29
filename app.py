@@ -77,7 +77,13 @@ def render_location_form():
 @app.route("/growth")
 def render_growth():
     # print(main.get_data_for_bar())
-    return render_template("growth.html", state="the US", data=main.get_data_for_bar())
+    try:
+        if request.args["state"] != "<none>":
+            return render_template("growth.html", options=states, state=request.args["state"], data=main.get_state_data_for_bar(request.args["state"]))
+        else:
+            return render_template("growth.html", options=states, state="the US", data=main.get_data_for_bar())
+    except:
+        return render_template("growth.html", options=states, state="the US", data=main.get_data_for_bar())
 
 if __name__=="__main__":
     app.run(debug=False)

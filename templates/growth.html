@@ -7,8 +7,20 @@
 {% block content %}
     <!--page content-->
 	<script src="static/turbines_growth.js"></script>
-	<meta id="data" data-state="{{ state }}" data-points="{{ data }}">
+	<meta id="data" data-state="{{ state }}" data-points='{{ data }}'>
 	<div class="center">
+		<br>
+		<form action="/growth">
+			<p>Filter by state (states not shown do not have any wind turbines):</p>
+			<select name="state">
+				{% for option in options %}
+					<option value={{ option }}>{{ option | e }}</option>
+				{% endfor %}
+			</select>
+			<br>
+			<br>
+			<input type="submit">
+		</form>
 		<br>
 		<!-- <h1>Growth in the number of wind turbines over the years</h1> -->
 		<br>

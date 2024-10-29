@@ -236,7 +236,7 @@ def get_data_for_pie():
 
 
 def get_data_for_bar():
-    result = ""
+    result = []
     
     years = get_years()
     totals = []
@@ -256,10 +256,37 @@ def get_data_for_bar():
             if element["Year"] == year["Year"]:
                 year["Total"] += 1
     
-    result += "\'[" + "\n"
+    
     for year in totals:
-        result += "\t{x: " + str(year["Year"]) + ", y: " + str(year["Total"]) + "}," + "\n"
-    result += "]\'"
+        result.append({"x": year["Year"], "y": year["Total"]})
     
-    return result
+    return json.dumps(result)
+
+
+def get_state_data_for_bar(state):
+    result = []
     
+    years = get_years()
+    totals = []
+    for year in years:
+        emptyYear = {
+            "Year": year,
+            "Total": 0
+        }
+        totals.append(emptyYear)
+    
+    
+    with open("static/data.json") as file:
+        data = json.load(file);
+    
+    for element in data:
+        for year in totals:
+            if element["Year"] == year["Year"]:
+                if element["Site"]["State"] == state:
+                    year["Total"] += 1
+    
+    
+    for year in totals:
+        result.append({"x": year["Year"], "y": year["Total"]})
+    
+    return json.dumps(result)
