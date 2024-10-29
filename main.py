@@ -182,6 +182,7 @@ def get_years():
         if element["Year"] not in years:
             years.append(element["Year"])
     
+    years.sort()
     return years
 
 
@@ -285,8 +286,13 @@ def get_state_data_for_bar(state):
                 if element["Site"]["State"] == state:
                     year["Total"] += 1
     
-    
+    firstYear = 0
     for year in totals:
-        result.append({"x": year["Year"], "y": year["Total"]})
+        if firstYear == 0:
+            if year["Total"] != 0:
+                result.append({"x": year["Year"], "y": year["Total"]})
+                firstYear = 1
+        else:
+            result.append({"x": year["Year"], "y": year["Total"]})
     
     return json.dumps(result)
