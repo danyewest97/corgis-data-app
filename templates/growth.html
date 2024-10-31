@@ -11,7 +11,7 @@
 	<div class="center">
 		<br>
 		<form action="/growth">
-			<p>Filter by state (states not shown do not have any wind turbines):</p>
+			<p>Filter by state (states not shown do not have any wind turbines or are not represented in the dataset):</p>
 			<select name="state">
 				{% for option in options %}
 					<option value={{ option }}>{{ option | e }}</option>
