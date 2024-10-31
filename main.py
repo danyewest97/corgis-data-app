@@ -186,11 +186,41 @@ def get_years():
     return years
 
 
+
+
 def get_state_data(state):
     result = []
     
     result.append("<h1>Here is the wind turbine info on " + state + ":</h1>")
-    result.append("<p>If all the wind turbines in " + state + " worked together at maximum capacity, they could produce " + str(int(get_state_total("Turbine", "Capacity", state) / 1000)) + " megawatts of power!")
+    result.append("<br>")
+    
+    result.append("<p>If all the wind turbines in " + state + " worked together at maximum capacity, they could produce " + str(int(get_state_total("Turbine", "Capacity", state) / 1000)) + " megawatts of power! That's enough to power " + str(int(get_state_total("Turbine", "Capacity", state) / 1.2)) + " houses!")
+    
+    result.append("<br>")
+    
+    result.append("<p>The average height of all wind turbines in " + state + " is " + str(int(get_state_average("Turbine", "Total_Height", state))) + " meters!")
+    
+    result.append("<p>The average electrical generation capacity of all wind turbines in " + state + " is " + str(int(get_state_average("Turbine", "Capacity", state))) + " kilowatts of power!")
+    
+    result.append("<br>")
+    
+    result.append("<p>If every wind turbine in " + state + " was stacked on top of each other, the total height of all of them would be " + str(int(get_state_total("Turbine", "Total_Height", state))) + " meters! That\'s " + str(int(get_state_total("Turbine", "Total_Height", state)) / 100) + " football fields tall, or about " + str(round(int(get_state_total("Turbine", "Total_Height", state)) / 0.28, 2)) + " corgis stacked on top of each other!")
+    result.append("<br>")
+    result.append("<br>")
+    result.append("<img src=\"static/corgis.jfif\" alt=\"Corgis stacked on top of each other\">")
+    result.append("<br>")
+    
+    result.append("<p>The total swept area of all wind turbines in " + state + " is " + str(int(get_state_total("Turbine", "Swept_Area", state) / 1000)) + " square meters!")
+    
+    result.append("<br>")
+    
+    result.append("<p>The average rotor diameter of all wind turbines in " + state + " is " + str(int(get_state_average("Turbine", "Rotor_Diameter", state))) + " meters! That's about " + str(int(get_state_average("Turbine", "Rotor_Diameter", state)) / 2) + " bald eagle wingspans!")
+    result.append("<br>")
+    result.append("<br>")
+    result.append("<img src=\"static/eagle.jfif\" alt=\"A bald eagle with its wings outstretched\">")
+    result.append("<img src=\"static/eagle.jfif\" alt=\"A bald eagle with its wings outstretched\">")
+    result.append("<img src=\"static/eagle.jfif\" alt=\"A bald eagle with its wings outstretched\">")
+    
     return result
 
 
@@ -204,6 +234,23 @@ def get_state_total(category, key, state):
         if element["Site"]["State"] == state:
             total += element[category][key]
     return total
+
+def get_state_average(category, key, state):
+    with open("static/data.json") as file:
+        data = json.load(file);
+    
+    
+    total = 0
+    numData = 0
+    for element in data:
+        if element["Site"]["State"] == state:
+            total += element[category][key]
+            numData += 1
+    return round(total / numData, 2)
+
+
+
+
 
 def get_data_for_pie():
     result = ""
