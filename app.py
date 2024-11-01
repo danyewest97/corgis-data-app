@@ -49,14 +49,20 @@ def render_project_form():
         keyString = keyString.replace("_", " ")
         if (keyString == "Number Turbines"):
             keyString == "Number of Turbines"
-        return render_template('projects.html', response=main.turbineToString(data), keyhighlow="Here is the info on one of the turbines in the project with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
+        if request.args["highlow"] == "average":
+            return render_template('projects.html', response=(data), keyhighlow="The average " + keyString + " of all turbine projects in the US is: ", options=states)
+        else:
+            return render_template('projects.html', response=main.turbineToString(data), keyhighlow="Here is the info on one of the turbines in the project with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
     else:
         data = main.get_data_by_state("Project", request.args["key"], request.args["highlow"], state)
         keyString = str(request.args["key"]).lower()
         keyString = keyString.replace("_", " ")
         if (keyString == "Number Turbines"):
             keyString == "Number of Turbines"
-        return render_template('projects.html', response=main.turbineToString(data), keyhighlow="Here is the info on one of the turbines in the project with the " + request.args["highlow"] + "est " + keyString + " in " + state + ": ", options=states)
+        if request.args["highlow"] == "average":
+            return render_template('projects.html', response=(data), keyhighlow="The average " + keyString + " of all turbine projects in " + state + "is: ", options=states)
+        else:
+            return render_template('projects.html', response=main.turbineToString(data), keyhighlow="Here is the info on one of the turbines in the project with the " + request.args["highlow"] + "est " + keyString + ": ", options=states)
     
     
     
